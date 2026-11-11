@@ -153,3 +153,11 @@ CREATE TABLE Auditoria_Log (
     datos_nuevos_json JSONB NOT NULL,  -- JSONB nativo de Postgres
     ip_dispositivo_origen VARCHAR(50) NULL
 );
+CREATE INDEX idx_establecimiento_coordenadas ON Establecimiento USING GIST (coordenadas_centroide);
+CREATE INDEX idx_potrero_poligono ON Potrero USING GIST (poligono_limites);
+CREATE INDEX idx_evento_ubicacion ON Evento USING GIST (ubicacion_gps);
+CREATE INDEX idx_fotografia_ubicacion ON Fotografia USING GIST (ubicacion_gps_captura);
+
+CREATE INDEX idx_campana_potrero ON Campana(id_potrero);
+CREATE INDEX idx_evento_campana ON Evento(id_campana);
+CREATE INDEX idx_tarea_campana ON Tarea(id_campana);
